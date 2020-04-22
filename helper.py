@@ -1,4 +1,5 @@
-##REMEMBER TO COMMENT THIS
+# Author: Bryson Chavis
+
 filein = "temp.txt"
 fileout = "sudo_in.txt"
 def readin():
@@ -6,7 +7,7 @@ def readin():
     lines = f.readlines()
     f.close()
     f = open(fileout, "w")
-    # remove the lines that cannot contain numbers (i.e. the puzzle borderlines) 
+    # Remove the lines that cannot contain numbers (i.e. the puzzle borderlines) 
     for i in range(0,12,3):
         del lines[i]
     row = col = 1
@@ -15,7 +16,7 @@ def readin():
         for j in i:
             if j == '*' or j.isdigit():
                 if j.isdigit():
-                    # Writing to the sudo_in file
+                    # Writes the numbers to the sudo_in file
                     f.writelines("%s %d %d\n" % (j, row, col))
                 col += 1
         row += 1        

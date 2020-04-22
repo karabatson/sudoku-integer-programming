@@ -3,7 +3,9 @@ The Looping Sudoku Problem Formulation for the PuLP Modeller
 
 Authors: Antony Phillips, Dr Stuart Mitcehll
 
-Edited by: Kara Batson, Evan Branyon and Chelsea Menenzes
+Edited by: Kara Batson and Bryson Chavis
+
+Project: Kara Batson, Evan Branyon, Chelsea Menezes 
 """
 # Import PuLP modeler functions
 from pulp import *
@@ -50,41 +52,41 @@ for v in Vals:
     for b in Boxes:
         prob += lpSum([choices[v][r][c] for (r,c) in b]) == 1,""
                         
-# The starting numbers are entered as constraints                
-# NOTE: A puzzle with incomplete clues can have more than one solution
-#TEST
-##prob += choices["3"]["1"]["3"] == 1,""
-##prob += choices["1"]["1"]["7"] == 1,""
-##prob += choices["6"]["1"]["8"] == 1,""
-##prob += choices["9"]["1"]["9"] == 1,""
-##prob += choices["1"]["2"]["1"] == 1,""
-##prob += choices["2"]["2"]["2"] == 1,""
-##prob += choices["7"]["2"]["7"] == 1,""
-##prob += choices["4"]["3"]["2"] == 1,""
-##prob += choices["5"]["3"]["6"] == 1,""
-##prob += choices["5"]["4"]["2"] == 1,""
-##prob += choices["2"]["4"]["5"] == 1,""
-##prob += choices["9"]["4"]["7"] == 1,""
-##prob += choices["3"]["5"]["6"] == 1,""
-##prob += choices["7"]["5"]["8"] == 1,""
-##prob += choices["2"]["6"]["1"] == 1,""
-##prob += choices["5"]["6"]["4"] == 1,""
-##prob += choices["9"]["6"]["5"] == 1,""
-##prob += choices["4"]["6"]["6"] == 1,""
-##prob += choices["8"]["7"]["1"] == 1,""
-##prob += choices["3"]["7"]["5"] == 1,""
-##prob += choices["6"]["7"]["6"] == 1,""
-##prob += choices["4"]["8"]["3"] == 1,""
-##prob += choices["5"]["8"]["7"] == 1,""
-##prob += choices["6"]["9"]["1"] == 1,""
-##prob += choices["8"]["9"]["8"] == 1,""
+# The starting numbers are entered as constraints
+# This section should only be used for manual testing
+# For our purposes, this can be ignored 
+    ##prob += choices["3"]["1"]["3"] == 1,""
+    ##prob += choices["1"]["1"]["7"] == 1,""
+    ##prob += choices["6"]["1"]["8"] == 1,""
+    ##prob += choices["9"]["1"]["9"] == 1,""
+    ##prob += choices["1"]["2"]["1"] == 1,""
+    ##prob += choices["2"]["2"]["2"] == 1,""
+    ##prob += choices["7"]["2"]["7"] == 1,""
+    ##prob += choices["4"]["3"]["2"] == 1,""
+    ##prob += choices["5"]["3"]["6"] == 1,""
+    ##prob += choices["5"]["4"]["2"] == 1,""
+    ##prob += choices["2"]["4"]["5"] == 1,""
+    ##prob += choices["9"]["4"]["7"] == 1,""
+    ##prob += choices["3"]["5"]["6"] == 1,""
+    ##prob += choices["7"]["5"]["8"] == 1,""
+    ##prob += choices["2"]["6"]["1"] == 1,""
+    ##prob += choices["5"]["6"]["4"] == 1,""
+    ##prob += choices["9"]["6"]["5"] == 1,""
+    ##prob += choices["4"]["6"]["6"] == 1,""
+    ##prob += choices["8"]["7"]["1"] == 1,""
+    ##prob += choices["3"]["7"]["5"] == 1,""
+    ##prob += choices["6"]["7"]["6"] == 1,""
+    ##prob += choices["4"]["8"]["3"] == 1,""
+    ##prob += choices["5"]["8"]["7"] == 1,""
+    ##prob += choices["6"]["9"]["1"] == 1,""
+    ##prob += choices["8"]["9"]["8"] == 1,""
 
 
 ## Read the file inputs for choices
 rfile = open(filename)
 while lines := rfile.readline():
     num = [x.strip(' ') for x in lines]
-    ## Seperates by spaces, every 2 elements
+    ## Seperates by spaces every 2 elements
     prob += choices[num[0]][num[2]][num[4]] == 1,""
 rfile.close()
 
@@ -99,7 +101,7 @@ while True:
     prob.solve()
     # The status of the solution is printed to the screen
     print ("Status:", LpStatus[prob.status])
-    # The solution is printed if it was deemed "optimal" i.e met the constraints
+    # The solution is printed if it was deemed "optimal" (i.e met the constraints) 
     if LpStatus[prob.status] == "Optimal":
         # The solution is written to the sudokuout.txt file 
         for r in Rows:
